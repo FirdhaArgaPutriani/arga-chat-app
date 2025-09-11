@@ -5,4 +5,9 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@ruesable':fileURLToPath(new URL('./src/components/ruesable', import.meta.url))
+    }
+  }
 })

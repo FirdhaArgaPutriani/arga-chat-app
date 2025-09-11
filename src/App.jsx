@@ -1,10 +1,14 @@
-import React from "react";
+import { Navigate, Route, Router, Routes } from "react-router-dom";
+import Login from "./component/Login";
 
 const App = () => {
+  
   return (
-    <div>
-      <h1 class="text-3xl font-bold underline"> Hello world! </h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={ user ? <Navigate to="/chat" /> : <Login onLogin={ setUser }/>} />
+      </Routes>
+    </Router>
   );
 };
 

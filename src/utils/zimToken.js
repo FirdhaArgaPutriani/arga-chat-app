@@ -13,7 +13,7 @@ const appConfig = {
  *
  * This code example only provides a client-side token generation example. Please make sure to generate tokens on your own server to avoid leaking your ServerSecret.
  */
-export function generateZimToken(userID, seconds) {
+export function generateZegoToken(userID, seconds) {
   if (!userID) return '';
 
   // Construct encrypted data
