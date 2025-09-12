@@ -14,10 +14,10 @@ const Login = ({ onLogin }) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const [loading, setLoading] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
-        e.preventdefault();
+        e.preventDefault();
 
         if(!email || !password) {
             return setError("Please enter both email and password");
@@ -65,7 +65,7 @@ const Login = ({ onLogin }) => {
                         label="E-mail"
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.targer.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                         placeholder="example@email.com"
                     />
                     <InputField 
@@ -73,7 +73,7 @@ const Login = ({ onLogin }) => {
                         label="Password"
                         type="password"
                         value={password}
-                        onChange={(e) => setPassword(e.targer.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder="********"
                     />
                     <FormButton 

@@ -1,7 +1,6 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { updateProfile } from "firebase/auth";
 import { auth } from "../../firebase_config";
 import InputField from "./ruesable/InputField";
 import FormButton from "./ruesable/FormButton";
@@ -15,8 +14,9 @@ const SignUp = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleChande = (e) => {
+  const handleChange = (e) => {
     setFormData ({
         ...formData,
         [e.target.name]: e.target.value,
@@ -59,32 +59,32 @@ const SignUp = () => {
                     id="name"
                     label="Full Name"
                     type="text"
-                    value={FormData.name}
-                    onChange={handleChande}
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Full Name"
                 />
                 <InputField
                     id="email"
                     label="E-mail"
                     type="email"
-                    value={FormData.email}
-                    onChange={handleChande}
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="example@email.com"
                 />
                 <InputField
                     id="password"
                     label="Password"
                     type="password"
-                    value={FormData.password}
-                    onChange={handleChande}
+                    value={formData.password}
+                    onChange={handleChange}
                     placeholder="*********"
                 />
                 <InputField
                     id="confirmPassword"
-                    label="Password"
-                    type="Confirm Password"
-                    value={FormData.confirmPassword}
-                    onChange={handleChande}
+                    label="Confirm Password"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
                     placeholder="*********"
                 />
                 <FormButton
@@ -93,7 +93,7 @@ const SignUp = () => {
                     loadingText="Creating Account..."
                 />
             </form>
-            <p className="tect-center text-gray-600 mt-4">
+            <p className="text-center text-gray-600 mt-4">
                 Alredy have an account?{""}
                 <a href="/login" className="text-purple-600 hover:underline">Login</a>
             </p>
@@ -102,4 +102,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default SignUp;
