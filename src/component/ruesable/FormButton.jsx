@@ -13,4 +13,4 @@ const FormButton = ({loading, text, loadingText}) => (
   </button>
 )
 
-export default FormButton;
+export default FormButton

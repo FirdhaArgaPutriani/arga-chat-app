@@ -1,4 +1,4 @@
-const InputField = ({ id, label, type, value, onChange, placeholder }) => {
+const InputField = ({ id, label, type, value, onChange, placeholder }) => (
     <div className="mb-4">
         <label htmlFor={id} className="block text-gray-700 mb-2">
             {label}
@@ -13,6 +13,7 @@ const InputField = ({ id, label, type, value, onChange, placeholder }) => {
             placeholder={placeholder}
         />
     </div>
-};
+);
+
 
 export default InputField;

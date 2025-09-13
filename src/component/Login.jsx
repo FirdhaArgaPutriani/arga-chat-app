@@ -27,7 +27,7 @@ const Login = ({ onLogin }) => {
 
         try {
             const { user } = await signInWithEmailAndPassword(auth, email, password);
-            const token = generateZegoToken(user.displayName, 7200);
+            const token = generateZegoToken(user.uid, 7200);
             
             await loginZIM({
                 appID,
@@ -59,7 +59,7 @@ const Login = ({ onLogin }) => {
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h2 className="text-2xl font-bold text-center">Login</h2>
                 { error && <p className="text-red-500 mb-4 text-center">{ error }</p>}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={ handleSubmit }>
                     <InputField 
                         id="email"
                         label="E-mail"
