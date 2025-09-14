@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { logout } from "../auth";
 import ThemeToggle from "./ThemeToggle";
+import { FiLogOut } from "react-icons/fi";
+import { FaCommentDots } from "react-icons/fa";
+import { useTheme } from "../contexts/ThemeContext";
+import {
+    addFriendZIM, fetchConversations, sendTextMessage
+} from "../services/zimServices"
+import { auth } from "../../firebase_config";
 
 const Sidebar = ({ onSelectChat }) => {
     const { theme } = useTheme();
@@ -75,7 +82,7 @@ const Sidebar = ({ onSelectChat }) => {
                 </button>
             </div>
             {showAddFriendDialog && (
-                <div className="fixed inset-0 bg-black flex items-center justify-center z-[9999]">
+                <div className="fixed inset-0 bg-opacity-50 bg-black flex items-center justify-center z-[9999]">
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-sm">
                         <h2 className="text-lg font-semibold mb-4 text-center">Add New Friend</h2>
                         <input
@@ -111,9 +118,50 @@ const Sidebar = ({ onSelectChat }) => {
                     const unreadCount = conversation.unreadMessageCount || 0;
                     
                     return (
-                        <div className=""></div>
-                    )
+                        <div 
+                            key={ conversation.conversationID } 
+                            onClick={() => onSelectChat( conversation )}
+                            className={`p-3 border-b bg-gray-200 dark:border-gray-700 flex items-center hover:bg-gray-100 
+                            dark:hover:bg-gray-800 cursor-pointer transition-colors ${ unreadCount > 0 ? 'bg-purple-100 dark:bg-purple-900/20' : ''}
+                            `}>
+                            <div className="relative">
+                                <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold">
+                                    { avatar }
+                                </div>
+                                { unreadCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                                        { unreadCount }
+                                    </span>
+                                )}
+                            </div>
+                            <div className="ml-3 flex-1">
+                                <div className="flex justify-between items-center">
+                                    <h3 className="font-medium">
+                                        { conversation.conversationName || "Unknown" }
+                                    </h3>
+                                    <span className="text-xs text-gray-500">{ timeString }</span>
+                                </div>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                                    { lastMessage }
+                                </p>
+                            </div>
+                        </div>
+                    );
                 })}
+            </div>
+            <div>
+                <div className="p-4 border-t border-green-200 dark:border-gray-700 mt-auto">
+                    <button
+                        onClick={ handleLogout }
+                        className="w-full flex items-center gap-2 p-2 text-gray-900 bg-red-200 hover:bg-red-500 dark:bg-purple-300 dark:hover:bg-red-400"
+                    >
+                        <FiLogOut className="w-5 h-5 text-current"/>
+                        Logout
+                    </button>
+                    <div className="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">
+                        Your UID: { userUID }
+                    </div>
+                </div>
             </div>
         </div>
     );
