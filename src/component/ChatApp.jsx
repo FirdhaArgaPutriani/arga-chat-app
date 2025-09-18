@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
+import { onReceiveMessage, queryHistoryMessage, sendTextMessage } from '../services/zimServices';
+import Sidebar from './Sidebar';
 import ChatContainer from './ChatContainer';
+import UserProfile from './UserProfile';
 
 const ChatApp = ({ user }) => {
   const [activeChat, setActiveChat] = useState(null);
@@ -90,9 +93,14 @@ const ChatApp = ({ user }) => {
             messages={messages}
             onSendMessage={handleSendMessage}
           />
+          <UserProfile user={activeChat}/>
         </>
       ) : (
-        <div className=""></div>
+        <div className="flex-1 flex items-center justify-center">
+          <p className="text-gray-500 dark:text-gray-400">
+            Select a chat to start messsaging
+          </p>
+        </div>
       )}
     </div>
   )
