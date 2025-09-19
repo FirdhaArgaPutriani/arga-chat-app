@@ -29,6 +29,12 @@ const Sidebar = ({ onSelectChat }) => {
         fetchChat();
     }, []);
 
+    useEffect(() => {
+        if (auth.currentUser) {
+            setUserUID(auth.currentUser.uid);
+        }
+    }, []);
+
     const handleLogout = () => {
         logout();
         window.location.href = "/login";
@@ -56,7 +62,7 @@ const Sidebar = ({ onSelectChat }) => {
                 onSelectChat(newConv);
             } else {
                 console.warn(
-                    "Conversation not found yet. It may appear after firdt message."
+                    "Conversation not found yet. It may appear after first message."
                 );
             }
         } catch (err) {
@@ -150,7 +156,7 @@ const Sidebar = ({ onSelectChat }) => {
                 })}
             </div>
             <div>
-                <div className="p-4 border-t border-green-200 dark:border-gray-700 mt-auto">
+                <div className="p-4 border-t border-gray-200 dark:border-gray-700 mt-auto">
                     <button
                         onClick={ handleLogout }
                         className="w-full flex items-center gap-2 p-2 text-gray-900 bg-red-200 hover:bg-red-500 dark:bg-purple-300 dark:hover:bg-red-400"

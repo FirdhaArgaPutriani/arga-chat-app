@@ -37,6 +37,7 @@ const Login = ({ onLogin }) => {
             });
             watchTokenExpiry(
                 async (userID) => generateZegoToken(userID, 7200),
+                user.uid
             );
             const userData = {
                 email: user.email,
@@ -83,7 +84,7 @@ const Login = ({ onLogin }) => {
                     />
                 </form>
                 <p className="text-center text-gray-600 mt-4">
-                    Don't have an account?{""}
+                    Don't have an account?{" "}
                     <button onClick={() => navigate("/signup")} className="text-purple-600 hover:underline bg-transparent border-none cursor-pointer">Sign Up</button>
                 </p>
             </div>

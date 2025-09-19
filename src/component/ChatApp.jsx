@@ -48,7 +48,7 @@ const ChatApp = ({ user }) => {
         id: sent.messageID || messages.length + 1,
         text: sent.message,
         sender: 'me',
-        time: new Data(sent.timestamp).toLocaleTimeString([], {
+        time: new Date(sent.timestamp).toLocaleTimeString([], {
           hour: '2-digit',
           minute: '2-digit'
         }),
@@ -62,16 +62,16 @@ const ChatApp = ({ user }) => {
   useEffect(() => {
     if (!activeChat) return;
 
-    const cleanup = onReceiveMessage((incomeingMessages) => {
-      const cleanup = incomeingMessages.filter(
+    const cleanup = onReceiveMessage((incomingMessages) => {
+      const filtered = incomingMessages.filter(
         (msg) => String(msg.conversationID) === String(activeChat.conversationID)
       );
       if (filtered.length) {
         const newMsgs = filtered.map((msg) => ({
-          id: sent.messageID,
-          text: sent.message,
+          id: msg.messageID,
+          text: msg.message,
           sender: msg.direction === 0 ? 'me' : 'other',
-          time: new Data(sent.timestamp).toLocaleTimeString([], {
+          time: new Date(msg.timestamp).toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit'
           }),
@@ -98,7 +98,7 @@ const ChatApp = ({ user }) => {
       ) : (
         <div className="flex-1 flex items-center justify-center">
           <p className="text-gray-500 dark:text-gray-400">
-            Select a chat to start messsaging
+            Select a chat to start messaging
           </p>
         </div>
       )}
